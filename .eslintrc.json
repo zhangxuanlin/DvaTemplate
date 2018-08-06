@@ -19,6 +19,10 @@
         }
     },
     "rules": {
+        "object-curly-newline": [0, {
+            "ObjectExpression": "always",
+            "ObjectPattern": { "multiline": true }
+        }],
         "arrow-parens": [
             "error",
             "always"

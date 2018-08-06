@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Button, message } from 'antd';
-import Home from './Home/index';
+import { message } from 'antd';
 import fetch from '../utils/request';
-import styles from './IndexPage.css';
+import Layouts from '../layouts/layout';
 
 class IndexPage extends React.Component {
     constructor(props) {
@@ -29,16 +28,7 @@ class IndexPage extends React.Component {
         const { i } = this.state;
         console.log(i);
         return (
-            <div className={styles.normal}>
-                <h1 className={styles.title}>Yay! Welcome to dva!</h1>
-                <Home />
-                <div className={styles.welcome} />
-                <ul className={styles.list}>
-                    <Button type="primary">测试</Button>
-                    <li className={styles.home}>To get started, edit <code>src/index.js</code> and save to reload.</li>
-                    <li><a href="https://github.com/dvajs/dva-docs/blob/master/v1/en-us/getting-started.md">Getting Started</a></li>
-                </ul>
-            </div>
+            <Layouts />
         );
     }
 }

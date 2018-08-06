@@ -1,5 +1,5 @@
 const path = require('path');
-console.log(5,__dirname, 6)
+
 export default {
     "entry": "./src/index.js",
     "disableCSSModules": false,
@@ -15,6 +15,12 @@ export default {
         "development": {
             "extraBabelPlugins": [
                 "dva-hmr",
+                ["import", { "libraryName": "antd", "style": "css" }],
+            ]
+        },
+        "production": {
+            "publicPath": "./",
+            "extraBabelPlugins": [
                 ["import", { "libraryName": "antd", "style": "css" }],
             ]
         }
