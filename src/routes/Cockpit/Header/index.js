@@ -11,7 +11,7 @@ const Header = (props) => {
         <header className={styles.header}>
             <h1>{title}</h1>
             <Tool />
-            <Link to="home">跳至平台</Link>
+            <Link to="home">跳至平台1</Link>
             {/* <ButtonGroup /> */}
         </header>
     );
