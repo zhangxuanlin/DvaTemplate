@@ -1,10 +1,6 @@
 import fetch from 'dva/fetch';
-import { message } from 'antd';
 
 function parseJSON(response) {
-    if (!response.status === 200) {
-        message.error('网络错误');
-    }
     return response.json();
 }
 
@@ -31,29 +27,30 @@ function checkStatus(response) {
 //          .then(data => {console.log(data)})
 //          .catch(err => {console.log(err, 2)});
 //  }
+
 export default {
     get(url) {
         return fetch(
             url,
             {
                 method: 'get',
-            }
+            },
         )
             .then(checkStatus)
             .then(parseJSON)
-            .then((data) => ({ data }))
-            .catch((err) => ({ err }));
+            .then(data => ({ data }))
+            .catch(err => ({ err }));
     },
     post(url) {
         return fetch(
             url,
             {
                 method: 'post',
-            }
+            },
         )
             .then(checkStatus)
             .then(parseJSON)
-            .then((data) => ({ data }))
-            .catch((err) => ({ err }));
+            .then(data => ({ data }))
+            .catch(err => ({ err }));
     },
 };

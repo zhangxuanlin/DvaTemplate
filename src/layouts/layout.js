@@ -1,6 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { Layout, Menu, Icon } from 'antd';
 import styles from './style.less';
+
 const { Header, Content, Sider } = Layout;
 
 class Layouts extends React.Component {
@@ -8,8 +11,19 @@ class Layouts extends React.Component {
         super(props);
         this.state = {
             collapsed: false,
+            SelectedKeys: window.location.pathname,
         };
     }
+
+    /*
+     * 点击menu
+     */
+    onSelectKey = (select) => {
+        this.setState({
+            SelectedKeys: select.key,
+        });
+    }
+
     /*
      * 显示隐藏触发器
      */
@@ -19,8 +33,10 @@ class Layouts extends React.Component {
             collapsed: !collapsed,
         });
     }
+
     render() {
-        const { collapsed } = this.state;
+        const { collapsed, SelectedKeys } = this.state;
+        const { children } = this.props;
         return (
             <Layout className={styles.layout}>
                 <Sider
@@ -29,22 +45,18 @@ class Layouts extends React.Component {
                     collapsed={collapsed}
                 >
                     <div className={styles.logo} />
-                    <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-                        <Menu.Item key="1">
+                    <Menu theme="dark" mode="inline" defaultSelectedKeys={[SelectedKeys]} onClick={this.onSelectKey}>
+                        <Menu.Item key="/home">
                             <Icon type="user" />
-                            <span className="nav-text">nav 1</span>
+                            <span><Link to="/home">首页</Link></span>
                         </Menu.Item>
-                        <Menu.Item key="2">
+                        <Menu.Item key="/about">
                             <Icon type="video-camera" />
-                            <span className="nav-text">nav 2</span>
+                            <span><Link to="/about">关于页</Link></span>
                         </Menu.Item>
-                        <Menu.Item key="3">
+                        <Menu.Item key="/map">
                             <Icon type="upload" />
-                            <span className="nav-text">nav 3</span>
-                        </Menu.Item>
-                        <Menu.Item key="4">
-                            <Icon type="user" />
-                            <span className="nav-text">nav 4</span>
+                            <span><Link to="/map">地图</Link></span>
                         </Menu.Item>
                     </Menu>
                 </Sider>
@@ -58,7 +70,7 @@ class Layouts extends React.Component {
                     </Header>
                     <Content className={styles.Content}>
                         <div className={styles.Main}>
-                            content
+                            {children}
                         </div>
                     </Content>
                 </Layout>
@@ -66,4 +78,9 @@ class Layouts extends React.Component {
         );
     }
 }
+
+Layouts.propTypes = {
+    children: PropTypes.node.isRequired,
+};
+
 export default Layouts;
